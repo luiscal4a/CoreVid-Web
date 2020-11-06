@@ -5,13 +5,24 @@
       <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Acción</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellidos</th>
+      <th scope="col">Espacio de trabajo</th>
+      <th scope="col">Fecha</th>
     </tr>
   </thead>
   <tbody>
+    <tr v-for="record in records" 
+        :key="record._id">
+        <th v-if="record.left == false" scope="row"><font-awesome-icon class="fa-2x" icon="sign-in-alt" :style="{ color: 'green' }"/></th>
+        <th v-else scope="row"><font-awesome-icon class="fa-2x" icon="sign-out-alt" :style="{ color: 'red' }"/></th>
+        <td>{{ record.user.firstName }}</td>
+        <td>{{ record.user.lastName }}</td>
+        <td>{{ record.workspace.name }}</td>
+        <td>{{ getHumanDate(record.creation) }}</td>
+    </tr>
+    <!--
     <tr>
       <th scope="row"><font-awesome-icon class="fa-2x" icon="sign-in-alt" :style="{ color: 'green' }"/></th>
       <td>Mark</td>
@@ -30,6 +41,7 @@
       <td>the Bird</td>
       <td>@twitter</td>
     </tr>
+    -->
   </tbody>
 </table>
   </div>
@@ -38,25 +50,43 @@
 
 <script>
 import topnavbar from '../components/Navbar.vue'
+import axios from "axios";
+import moment from 'moment'
 
 export default {
   
-  //middleware: 'isAdmin',
+  middleware: 'isAdmin',
   components: {
     topnavbar
   },
    data() {
     return {
-      search: {
-        query: '',
-        params: []
-      }
+      records: []
     }
   },
+
   methods: {
-    onSearch(data) {
-      this.search = data; 
+    getHumanDate : function (date) {
+        return moment(date).format('MMMM Do YYYY, h:mm:ss');
     }
+  },
+
+  mounted() {
+    this.config = {
+      headers: { Authorization: "Bearer " + localStorage.getItem("user-token") }
+    };
+    axios
+      .get(`http://localhost:3003/record/`, this.config)
+      .then(response => {
+        console.log(response.data)
+        this.records = response.data.sort(function(a, b) {
+          return new Date(a.creation) - new Date(b.creation);
+        });
+      })
+      .catch(e => {
+        console.log(e)
+        this.errors.push(e);
+      });
   }
 }
 </script>

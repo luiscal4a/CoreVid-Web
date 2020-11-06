@@ -45,11 +45,12 @@ export default {
       this.reserveSpace(workspace._id)
     },
     getIdeal: function() {
+      let localThis = this;
       axios
         .get(`http://localhost:3003/workspace/ideal`, this.config)
         .then(response => {
             console.log(response.data)
-            this.reserveSpaceresponse.data._id
+            localThis.reserveSpace(response.data._id)
           })
           .catch(e => {
             console.log(e)
@@ -71,6 +72,7 @@ export default {
         });
      },
      createRecord(id) {
+       let localThis = this;
         axios
           .post("http://localhost:3003/record/", {
             user: this.userId,
@@ -78,7 +80,7 @@ export default {
             left: false
           }, this.config)
           .then(function(response) {
-            console.log(response.data);
+            localThis.$emit('recharge')
           })
           .catch(function(err) {
             alert(err);

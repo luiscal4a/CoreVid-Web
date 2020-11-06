@@ -1,44 +1,77 @@
 <template>
   <div>
     <topnavbar ></topnavbar>
-    <catalogue></catalogue>
+    <div v-if="loaded">
+      <active v-if="isActive" :user="user" :workspace="workspace" @recharge="getUserId"></active>
+      <catalogue v-else @recharge="getUserId"></catalogue>
+    </div>
   </div>
 </template>
 
 <script>
 import topnavbar from "../components/Navbar.vue";
 import catalogue from "../components/catalogue/WorkspaceCatalogue.vue";
+import active from "../components/catalogue/ActiveWorkspace.vue";
 import axios from "axios";
 
 export default {
   middleware: "auth",
   components: {
     topnavbar,
-    catalogue
+    catalogue,
+    active
   },
   data() {
     return {
       errors: [],
-      workspaces: []
+      workspaces: [],
+      user: {},
+      workspace: {},
+      config: {},
+      isActive: false,
+      loaded: false
+    }
+  },
+
+  methods: {
+    getUserId() {
+      axios
+        .post(`http://localhost:3003/user/getUserIdByToken`, {
+          token: localStorage.getItem("user-token")
+        }, this.config)
+        .then(response => {
+          this.checkActive(response.data)
+        })
+        .catch(e => {
+          console.log(e)
+          this.errors.push(e);
+          this.loaded=true
+        });
+    },
+    checkActive(userId){
+      axios
+      .get(`http://localhost:3003/record/isActive/`+userId, this.config)
+      .then(response => {
+        console.log('hola')
+        console.log(response)
+        this.workspace = response.data.workspace
+        this.user = response.data.user
+        this.loaded=true
+        this.isActive=true
+      })
+      .catch(e => {
+        this.loaded=true
+        this.isActive=false
+        this.errors.push(e);
+      });
     }
   },
 
   mounted() {
-    let config = {
+    this.config = {
       headers: { Authorization: "Bearer " + localStorage.getItem("user-token") }
     };
-    axios
-      .get(`http://localhost:3003/workspace/available`, config)
-      .then(response => {
-        console.log(response.data)
-        this.workspaces = response.data.workspace.sort(function(a, b) {
-          return a.priority - b.priority;
-        });
-      })
-      .catch(e => {
-        console.log(e)
-        this.errors.push(e);
-      });
+    this.getUserId()
   }
 };
 </script>
