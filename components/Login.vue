@@ -60,7 +60,6 @@ export default {
           password: localThis.form.password
         })
         .then(function(response) {
-          console.log(response.data.token);
           localStorage.setItem("user-token", response.data.token);
           localStorage.setItem("user-name", localThis.form.username);
           localThis.changePage();

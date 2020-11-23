@@ -1,15 +1,15 @@
 <template>
   <div>
-    <topnavbar ></topnavbar>
-    <div v-if="loaded">
-      <active v-if="isActive" :user="user" :workspace="workspace" @recharge="getUserId"></active>
+    <topnavbar :logged="true" :admin="isAdmin"></topnavbar>
+    <div v-if="loaded" class="col d-flex justify-content-center">
+      <active v-if="isActive" :user="user" :workspace="workspace" @recharge="getUserId" class="myWP"></active>
       <catalogue v-else @recharge="getUserId"></catalogue>
     </div>
   </div>
 </template>
 
 <script>
-import topnavbar from "../components/Navbar.vue";
+import topnavbar from "../components/Navbar2.vue";
 import catalogue from "../components/catalogue/WorkspaceCatalogue.vue";
 import active from "../components/catalogue/ActiveWorkspace.vue";
 import axios from "axios";
@@ -29,6 +29,7 @@ export default {
       workspace: {},
       config: {},
       isActive: false,
+      isAdmin: false,
       loaded: false
     }
   },
@@ -43,7 +44,6 @@ export default {
           this.checkActive(response.data)
         })
         .catch(e => {
-          console.log(e)
           this.errors.push(e);
           this.loaded=true
         });
@@ -52,10 +52,9 @@ export default {
       axios
       .get(`http://localhost:3003/record/isActive/`+userId, this.config)
       .then(response => {
-        console.log('hola')
-        console.log(response)
         this.workspace = response.data.workspace
         this.user = response.data.user
+        this.isAdmin = this.user.role === "admin"
         this.loaded=true
         this.isActive=true
       })
@@ -77,17 +76,6 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (min-width: 768px) {
-  .workspace-area {
-    margin-top: 68px;
-  }
-}
-@media screen and (max-width: 768px) {
-  .workspace-area {
-    margin-bottom: 68px;
-  }
-}
-
 .workspace-area {
   margin-right: 30px;
   margin-left: 30px;
@@ -104,4 +92,5 @@ export default {
   display: block;
   margin-top: 20px;
 }
+
 </style>

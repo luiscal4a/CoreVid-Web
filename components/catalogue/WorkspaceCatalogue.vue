@@ -19,11 +19,13 @@
         {{ workspace.name }}
       </button>
     </div>
+    <!--
     <div class="title">
       Leyenda de espacios de trabajo
     </div>
     <hr>
     <b-img src="@/assets/planif1.png" fluid center alt="Plano de la asociación"> </b-img>  
+    -->
   </div>
 </template>
 
@@ -49,11 +51,9 @@ export default {
       axios
         .get(`http://localhost:3003/workspace/ideal`, this.config)
         .then(response => {
-            console.log(response.data)
             localThis.reserveSpace(response.data._id)
           })
           .catch(e => {
-            console.log(e)
             this.errors.push(e);
           });
      },
@@ -64,7 +64,6 @@ export default {
           available: false,
         }, this.config)
         .then(function(response) {
-          console.log(response.data);
           localThis.createRecord(id)
         })
         .catch(function(err) {
@@ -95,13 +94,11 @@ export default {
     axios
       .get(`http://localhost:3003/workspace/available`, this.config)
       .then(response => {
-        console.log(response.data)
         this.workspaces = response.data.workspace.sort(function(a, b) {
           return a.priority - b.priority;
         });
       })
       .catch(e => {
-        console.log(e)
         this.errors.push(e);
       });
 
@@ -110,11 +107,9 @@ export default {
         token: localStorage.getItem("user-token")
       }, this.config)
       .then(response => {
-        console.log(response.data)
         this.userId = response.data
       })
       .catch(e => {
-        console.log(e)
         this.errors.push(e);
       });
   }
@@ -122,16 +117,6 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (min-width: 768px) {
-  .workspace-area {
-    margin-top: 75px;
-  }
-}
-@media screen and (max-width: 768px) {
-  .workspace-area {
-    margin-bottom: 75px;
-  }
-}
 
 .workspace-area {
   margin-right: 30px;

@@ -7,7 +7,7 @@
 
 <script>
 import RegisterForm from '~/components/RegisterForm.vue'
-import topnavbar from '../components/Navbar.vue'
+import topnavbar from '../components/Navbar2.vue'
 
 export default {
   middleware: 'isNotLogged',

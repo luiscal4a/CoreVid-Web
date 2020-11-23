@@ -29,7 +29,6 @@ export default {
 
     computed: {
         getTextMe() {
-            console.log('bruh')
             return 'Tienes asignado el espacio \"' +  this.workspace.name + '\"'
         }
     },
@@ -52,7 +51,6 @@ export default {
                     active:false
                 }, this.config)
                 .then(function(response) {
-                    console.log(response.data);
                     localThis.leaveWorkspace()
                 })
                 .catch(function(err) {
@@ -85,16 +83,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-@media screen and (min-width: 768px) {
-  .workspace-area {
-    margin-top: 75px;
-  }
-}
-@media screen and (max-width: 768px) {
-  .workspace-area {
-    margin-bottom: 75px;
-  }
-}
-</style>

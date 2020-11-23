@@ -1,6 +1,6 @@
 <template>
   <div>
-      <topnavbar></topnavbar>
+      <topnavbar :logged="true" :admin="true"></topnavbar>
       <div class="workspace-area">
       <table class="table">
   <thead>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import topnavbar from '../components/Navbar.vue'
+import topnavbar from '../components/Navbar2.vue'
 import axios from "axios";
 import moment from 'moment'
 
@@ -78,13 +78,11 @@ export default {
     axios
       .get(`http://localhost:3003/record/`, this.config)
       .then(response => {
-        console.log(response.data)
         this.records = response.data.sort(function(a, b) {
           return new Date(a.creation) - new Date(b.creation);
         });
       })
       .catch(e => {
-        console.log(e)
         this.errors.push(e);
       });
   }
