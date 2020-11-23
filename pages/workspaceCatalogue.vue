@@ -37,7 +37,7 @@ export default {
   methods: {
     getUserId() {
       axios
-        .post(`http://localhost:3003/user/getUserIdByToken`, {
+        .post(`192.168.0.32:3003/user/getUserIdByToken`, {
           token: localStorage.getItem("user-token")
         }, this.config)
         .then(response => {
@@ -50,7 +50,7 @@ export default {
     },
     checkActive(userId){
       axios
-      .get(`http://localhost:3003/record/isActive/`+userId, this.config)
+      .get(`192.168.0.32:3003/record/isActive/`+userId, this.config)
       .then(response => {
         this.workspace = response.data.workspace
         this.user = response.data.user
