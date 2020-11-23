@@ -49,7 +49,7 @@ export default {
     getIdeal: function() {
       let localThis = this;
       axios
-        .get(`192.168.0.32:3003/workspace/ideal`, this.config)
+        .get(`apicovid19.coredumped.es/workspace/ideal`, this.config)
         .then(response => {
             localThis.reserveSpace(response.data._id)
           })
@@ -60,7 +60,7 @@ export default {
      reserveSpace(id) {
       let localThis = this;
       axios
-        .put("192.168.0.32:3003/workspace/reserve/"+id, {
+        .put("apicovid19.coredumped.es/workspace/reserve/"+id, {
           available: false,
         }, this.config)
         .then(function(response) {
@@ -73,7 +73,7 @@ export default {
      createRecord(id) {
        let localThis = this;
         axios
-          .post("192.168.0.32:3003/record/", {
+          .post("apicovid19.coredumped.es/record/", {
             user: this.userId,
             workspace: id,
             left: false
@@ -92,7 +92,7 @@ export default {
       headers: { Authorization: "Bearer " + localStorage.getItem("user-token") }
     };
     axios
-      .get(`192.168.0.32:3003/workspace/available`, this.config)
+      .get(`apicovid19.coredumped.es/workspace/available`, this.config)
       .then(response => {
         this.workspaces = response.data.workspace.sort(function(a, b) {
           return a.priority - b.priority;
@@ -103,7 +103,7 @@ export default {
       });
 
     axios
-      .post(`192.168.0.32:3003/user/getUserIdByToken`, {
+      .post(`apicovid19.coredumped.es/user/getUserIdByToken`, {
         token: localStorage.getItem("user-token")
       }, this.config)
       .then(response => {

@@ -44,7 +44,7 @@ export default {
         },
         createExitRecord() {
             let localThis = this;
-            axios.post("192.168.0.32:3003/record/", {
+            axios.post("apicovid19.coredumped.es/record/", {
                     user: this.user._id,
                     workspace: this.workspace._id,
                     left: true,
@@ -59,7 +59,7 @@ export default {
         },
         leaveWorkspace() {
             let localThis = this;
-            axios.get("192.168.0.32:3003/record/leaveActive/"+this.user._id, this.config)
+            axios.get("apicovid19.coredumped.es/record/leaveActive/"+this.user._id, this.config)
                 .then(function(response) {
                     localThis.freeWorkspace()
                 })
@@ -69,7 +69,7 @@ export default {
         },
         freeWorkspace() {
             let localThis = this;
-            axios.get("192.168.0.32:3003/workspace/free/"+this.workspace._id, this.config)
+            axios.get("apicovid19.coredumped.es/workspace/free/"+this.workspace._id, this.config)
                 .then(function(response) {
                     localThis.recharge()
                 })

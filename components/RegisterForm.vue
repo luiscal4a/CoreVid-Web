@@ -94,7 +94,7 @@
 			},
 			register(){
 				let localThis = this
-				axios.post( '192.168.0.32:3003/user',
+				axios.post( 'apicovid19.coredumped.es/user',
 						{
 							'userName':localThis.form.username,
 							'firstName':localThis.form.name,
