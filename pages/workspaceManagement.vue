@@ -76,7 +76,7 @@ export default {
       headers: { Authorization: "Bearer " + localStorage.getItem("user-token") }
     };
     axios
-      .get(`apicovid19.coredumped.es/record/`, this.config)
+      .get(`http://localhost:3003/record/`, this.config)
       .then(response => {
         this.records = response.data.sort(function(a, b) {
           return new Date(a.creation) - new Date(b.creation);

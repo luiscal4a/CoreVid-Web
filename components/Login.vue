@@ -55,7 +55,7 @@ export default {
     login() {
       let localThis = this;
       axios
-        .post("apicovid19.coredumped.es/user/log", {
+        .post("http://localhost:3003/user/log", {
           userName: localThis.form.username,
           password: localThis.form.password
         })
