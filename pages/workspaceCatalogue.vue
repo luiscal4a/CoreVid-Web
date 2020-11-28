@@ -37,7 +37,7 @@ export default {
   methods: {
     getUserId() {
       axios
-        .post(`https://apicovid19.coredumped.es//user/getUserIdByToken`, {
+        .post(`https://apicovid19.coredumped.es/user/getUserIdByToken`, {
           token: localStorage.getItem("user-token")
         }, this.config)
         .then(response => {
@@ -50,7 +50,7 @@ export default {
     },
     checkActive(userId){
       axios
-      .get(`https://apicovid19.coredumped.es//record/isActive/`+userId, this.config)
+      .get(`https://apicovid19.coredumped.es/record/isActive/`+userId, this.config)
       .then(response => {
         this.workspace = response.data.workspace
         this.user = response.data.user

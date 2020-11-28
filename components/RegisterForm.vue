@@ -94,7 +94,7 @@
 			},
 			register(){
 				let localThis = this
-				axios.post( 'https://apicovid19.coredumped.es//user',
+				axios.post( 'https://apicovid19.coredumped.es/user',
 						{
 							'userName':localThis.form.username,
 							'firstName':localThis.form.name,
