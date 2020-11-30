@@ -25,7 +25,7 @@
             placeholder="Introduce tu contraseña"
           ></b-form-input>
         </b-form-group>
-        <b-button type="submit" block variant="success">Submit</b-button>
+        <b-button type="submit" block variant="success">Inicia sesión</b-button>
       </b-form>
       <p class="font-small grey-text d-flex justify-content-end">
         ¿Aún no eres miembro?
