@@ -3,18 +3,18 @@
     <b-card class="col-md-6 mx-auto card">
       <img class="card-img-top" src="~/assets/logo.png" />
       <b-form @submit="onSubmit" v-if="show">
-        <b-form-group id="input-group-1" label="Username:" label-for="input-1">
+        <b-form-group id="input-group-1" label="Nombre de usuario:" label-for="input-1">
           <b-form-input
             id="input-1"
             v-model="form.username"
             required
-            placeholder="Enter username"
+            placeholder="Introduce tu nombre de usuario"
           ></b-form-input>
         </b-form-group>
 
         <b-form-group
           id="input-group-2"
-          label="Your password:"
+          label="Contraseña:"
           label-for="input-2"
         >
           <b-form-input
@@ -22,14 +22,14 @@
             v-model="form.password"
             required
             type="password"
-            placeholder="Enter password"
+            placeholder="Introduce tu contraseña"
           ></b-form-input>
         </b-form-group>
         <b-button type="submit" block variant="success">Submit</b-button>
       </b-form>
       <p class="font-small grey-text d-flex justify-content-end">
-        Not a member?
-        <a href="register" class="blue-text ml-1">Sign Up</a>
+        ¿Aún no eres miembro?
+        <a href="/register" class="blue-text ml-1">Regístrate</a>
       </p>
     </b-card>
   </div>

@@ -3,56 +3,56 @@
   <b-card class="col-md-6 mx-auto card">
 		<img class="card-img-top" src="~/assets/logo.png">
     <b-form  @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="input-group-1" label="Username:" label-for="input-1">
+      <b-form-group id="input-group-1" label="Nombre de usuario:" label-for="input-1">
         <b-form-input
           id="input-1"
           v-model="form.username"
           required
-          placeholder="Enter username"
+          placeholder="Introduce tu nombre de usuario"
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Your Name:" label-for="input-2">
+      <b-form-group id="input-group-2" label="Nombre:" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="form.name"
           required
-          placeholder="Enter name"
+          placeholder="Introduce tu nombre"
         ></b-form-input>
       </b-form-group>
 
-			<b-form-group id="input-group-3" label="Your Last Name:" label-for="input-3">
+			<b-form-group id="input-group-3" label="Apellidos:" label-for="input-3">
         <b-form-input
           id="input-3"
           v-model="form.lastName"
           required
-          placeholder="Enter last name"
+          placeholder="Introduce tus apellidos"
         ></b-form-input>
       </b-form-group>
 
-			<b-form-group id="input-group-4" label="Your password:" label-for="input-4">
+			<b-form-group id="input-group-4" label="Contraseña:" label-for="input-4">
         <b-form-input
           id="input-4"
           v-model="form.password"
           required
 					type="password"
-          placeholder="Enter password"
+          placeholder="Introduce tu contraseña"
         ></b-form-input>
       </b-form-group>
 
-			<b-form-group id="input-group-5" label="Repeat password:" label-for="input-5">
+			<b-form-group id="input-group-5" label="Repite la contraseña:" label-for="input-5">
         <b-form-input
           id="input-5"
           v-model="form.passwordRepeat"
           required
 					type="password"
-          placeholder="Enter password"
+          placeholder="Repite la contraseña"
         ></b-form-input>
       </b-form-group>
 			 <b-button type="submit" block variant="success">Submit</b-button>
     </b-form>
 		<p class="font-small grey-text d-flex justify-content-end">
-		Already a member? <a href="login" class="blue-text ml-1"> Log In</a></p>
+		¿Ya eres miembro? <a href="login" class="blue-text ml-1"> Inicia sesión</a></p>
   </b-card>
 </div>
 </template>

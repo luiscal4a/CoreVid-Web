@@ -13,7 +13,7 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-item right href="/login" v-if="!logged">Login</b-nav-item>
+          <b-nav-item right href="/login" v-if="!logged">Iniciar sesión</b-nav-item>
           <b-nav-item right href="/register" v-if="!logged">Registro</b-nav-item>
           <b-nav-item right @click="signout" v-if="logged">Cerrar sesión</b-nav-item>
         </b-navbar-nav>
